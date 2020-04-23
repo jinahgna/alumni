@@ -23,7 +23,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="(index, list) in boardListData" :key="index">
+                    <tr v-for="(list, index) in this.$store.state.common.boardListData.boardList" :key="index">
                         <td class="text-center">{{ list.rownum }}</td>
                         <td>
                             <a v-on:click="goDetailView(boardType, list.idx)">{{ list.title }} ({{ list.comm_cnt }})</a>
@@ -82,7 +82,7 @@ export default {
         };
     },
     computed: {
-        ...mapGetters(['boardList']),
+        // ...mapGetters(['boardList']),
     },
     mounted() {
         const query = qs.parse(window.location.search, { ignoreQueryPrefix: true });
@@ -91,11 +91,20 @@ export default {
         this.title = this.boardType === 'notice' ? '공지사항' : '자유게시판';
         this.url = `/getBoardList?type=${this.boardType}&num=`;
         const payload = `${this.url}${this.boardNum}`;
-        console.log('payload', payload);
-        this.$store.dispatch(commonActionType.ACTION_BOARD_LIST, payload);
+        // this.$store.dispatch(commonActionType.ACTION_BOARD_LIST, payload);
+        this.asdf();
+        console.log('@@@@@', this.$store.state.common.boardListData.boardList);
         // this.loadView();
     },
+    updated() {
+        console.log('updated : ', this.$store.state.common.boardListData.boardList);
+    },
     methods: {
+        async asdf() {
+            const payload = `${this.url}${this.boardNum}`;
+            await this.$store.dispatch(commonActionType.ACTION_BOARD_LIST, payload).the;
+            console.log('!!!!!!!');
+        },
         // api 호출
         loadView() {
             this.$axios({
