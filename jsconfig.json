@@ -1,0 +1,13 @@
+{
+    "include": ["src/**/*", "tests/**/*"],
+    "compilerOptions": {
+        "experimentalDecorators": true,
+        "allowSyntheticDefaultImports": true,
+        "baseUrl": ".",
+        "paths": {
+            "@/*": ["src/*"],
+            "@router/*": ["src/router/*"]
+        }
+    },
+    "exclude": ["node_modules"]
+}
