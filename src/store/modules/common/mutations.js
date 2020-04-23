@@ -1,18 +1,18 @@
-import { commonMutationType } from '@/store/mutationsType';
+import commonMutationType from '@/store/mutationsType';
 
 const mutations = {
     /**
-     * @description 로딩 상태 설정
+     * @description 게시글 리스트 설정
      * @param state
-     * @param payload 전달 받은 값: Boolean
+     * @param payload 전달 받은 값: object
      */
-    [commonMutationType.SET_LOADING_COMPLETE](state, payload) {
+    [commonMutationType.SET_BOARD_LIST](state, payload) {
         try {
-            if (typeof payload === 'boolean') {
-                state.loadingComplete = payload;
+            if (typeof payload === 'object') {
+                state.boardListData = payload;
             }
         } catch (e) {
-            console.error(`[commonMutationType.SET_LOADING_COMPLETE] error: ${e}`);
+            console.error(`[commonMutationType.SET_BOARD_LIST] error: ${e}`);
         }
     },
 };

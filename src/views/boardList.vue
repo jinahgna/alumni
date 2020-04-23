@@ -23,7 +23,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="list in boardListData" :key="list.name">
+                    <tr v-for="(index, list) in boardListData" :key="index">
                         <td class="text-center">{{ list.rownum }}</td>
                         <td>
                             <a v-on:click="goDetailView(boardType, list.idx)">{{ list.title }} ({{ list.comm_cnt }})</a>
@@ -59,6 +59,9 @@
 
 <script>
 import qs from 'qs';
+import { mapGetters } from 'vuex';
+import commonMutationType from '@/store/mutationsType';
+import commonActionType from '@/store/actionsType';
 
 export default {
     name: 'boardList',
@@ -78,12 +81,19 @@ export default {
             nextFlag: false,
         };
     },
+    computed: {
+        ...mapGetters(['boardList']),
+    },
     mounted() {
         const query = qs.parse(window.location.search, { ignoreQueryPrefix: true });
         this.boardType = query.type;
         this.boardNum = query.num;
         this.title = this.boardType === 'notice' ? '공지사항' : '자유게시판';
-        this.loadView();
+        this.url = `/getBoardList?type=${this.boardType}&num=`;
+        const payload = `${this.url}${this.boardNum}`;
+        console.log('payload', payload);
+        this.$store.dispatch(commonActionType.ACTION_BOARD_LIST, payload);
+        // this.loadView();
     },
     methods: {
         // api 호출

@@ -6,5 +6,4 @@ const commonActionType = {
     ACTION_BOARD_LIST: 'ACTION_BOARD_LIST', // 게시글 리스트 조회
 };
 
-// eslint-disable-next-line import/prefer-default-export
-export { commonActionType };
+export default commonActionType;
