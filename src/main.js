@@ -6,7 +6,7 @@ import vuetify from './plugins/vuetify';
 import App from './App.vue';
 import router from './router';
 import store from './store';
-// import '@/assets/css/reset.css';;
+// import '@/assets/css/reset.css';;;
 // import '@/assets/css/common.css';
 // import '@/assets/css/font.css';
 
