@@ -2,11 +2,17 @@
     <v-app>
         <div class="header-tab">
             <ul class="menu">
-                <li><router-link to="/">로그인</router-link></li>
-                <li><router-link to="/join">회원가입</router-link></li>
-                <li><router-link to="/boardList?type=notice&num=0">공지사항</router-link></li>
-                <li><router-link to="/boardList?type=free&num=0">게시판</router-link></li>
-                <li><router-link to="/infoModify">내정보수정</router-link></li>
+                <li>
+                    <router-link to="/">Home</router-link>
+                </li>
+                <!-- <li><router-link to="/join">회원가입</router-link></li> -->
+                <li>
+                    <router-link to="/boardList?type=notice&num=0">공지사항</router-link>
+                </li>
+                <li>
+                    <router-link to="/boardList?type=free&num=0">게시판</router-link>
+                </li>
+                <!-- <li><router-link to="/infoModify">내정보수정</router-link></li>-->
             </ul>
         </div>
         <v-content>

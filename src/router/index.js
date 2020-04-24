@@ -1,10 +1,10 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import login from '../views/login.vue';
+import home from '../views/home.vue';
 import join from '../views/join.vue';
 import boardList from '../views/boardList.vue';
-import boardDetailView from '../components/boardDetailView.vue';
-import boardWrite from '../components/boardWrite.vue';
+import boardDetailView from '../views/boardDetailView.vue';
+import boardWrite from '../views/boardWrite.vue';
 import infoModify from '../views/infoModify.vue';
 
 Vue.use(VueRouter);
@@ -15,33 +15,33 @@ const routes = [
     // { path: '/about', name: 'About', component: LayoutDefault, children: pageGroup2 },
     {
         path: '/',
-        name: 'login',
-        component: login
+        name: 'home',
+        component: home,
     },
     {
         path: '/join',
         name: 'join',
-        component: join
+        component: join,
     },
     {
         path: '/boardList',
         name: 'boardList',
-        component: boardList
+        component: boardList,
     },
     {
         path: '/boardDetailView',
         name: 'boardDetailView',
-        component: boardDetailView
+        component: boardDetailView,
     },
     {
         path: '/boardWrite',
         name: 'boardWrite',
-        component: boardWrite
+        component: boardWrite,
     },
     {
         path: '/infoModify',
         name: 'infoModify',
-        component: infoModify
+        component: infoModify,
     },
 ];
 
