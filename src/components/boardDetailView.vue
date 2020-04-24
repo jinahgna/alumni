@@ -3,9 +3,7 @@
         <h2>{{ this.title }}</h2>
         <v-simple-table>
             <template v-slot:default>
-                <caption>
-                    게시판 글 상세보기/등록하기
-                </caption>
+                <caption>게시판 글 상세보기</caption>
                 <colgroup>
                     <col style="width:75px;" />
                     <col />

@@ -4,6 +4,7 @@ import login from '../views/login.vue';
 import join from '../views/join.vue';
 import boardList from '../views/boardList.vue';
 import boardDetailView from '../components/boardDetailView.vue';
+import boardWrite from '../components/boardWrite.vue';
 import infoModify from '../views/infoModify.vue';
 
 Vue.use(VueRouter);
@@ -12,11 +13,36 @@ const routes = [
     // { path: '*', component: NotFoundComponent }, // 404 page
     // { path: '/home', name: 'Home', component: LayoutDefault, children: pageGroup1 },
     // { path: '/about', name: 'About', component: LayoutDefault, children: pageGroup2 },
-    { path: '/', name: 'login', component: login },
-    { path: '/join', name: 'join', component: join },
-    { path: '/boardList', name: 'boardList', component: boardList },
-    { path: '/boardDetailView', name: 'boardDetailView', component: boardDetailView },
-    { path: '/infoModify', name: 'infoModify', component: infoModify },
+    {
+        path: '/',
+        name: 'login',
+        component: login
+    },
+    {
+        path: '/join',
+        name: 'join',
+        component: join
+    },
+    {
+        path: '/boardList',
+        name: 'boardList',
+        component: boardList
+    },
+    {
+        path: '/boardDetailView',
+        name: 'boardDetailView',
+        component: boardDetailView
+    },
+    {
+        path: '/boardWrite',
+        name: 'boardWrite',
+        component: boardWrite
+    },
+    {
+        path: '/infoModify',
+        name: 'infoModify',
+        component: infoModify
+    },
 ];
 
 const router = new VueRouter({
