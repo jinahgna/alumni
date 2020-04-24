@@ -5,8 +5,8 @@ import common from '@/store/modules/common';
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-    modules: {
-        common,
-    },
-    strict: process.env.NODE_ENV !== 'production',
+	modules: {
+		common,
+	},
+	strict: process.env.NODE_ENV !== 'production',
 });
