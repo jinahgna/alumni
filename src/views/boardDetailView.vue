@@ -47,7 +47,7 @@
         </v-simple-table>
         <!-- button area -->
         <div class="text-right">
-            <v-btn depressed small color="#6fd400" dark class="mr-1">수정</v-btn>
+            <v-btn depressed small color="#6fd400" dark class="mr-1" @click="modify">수정</v-btn>
             <v-btn depressed small color="#6fd400" dark>삭제</v-btn>
         </div>
         <!-- //button area -->
@@ -111,6 +111,9 @@ export default {
             const payload = `${this.url}${this.boardId}`;
             await this.$store.dispatch(commonActionType.ACTION_BOARD_DETAIL, payload);
             await this.$store.dispatch(commonActionType.ACTION_BOARD_COMMENT, this.boardId);
+        },
+        modify() {
+            this.$router.push(`/boardWrite?type=${this.boardType}&board_id=${this.boardId}`);
         },
     },
 };
