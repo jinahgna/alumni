@@ -8,7 +8,9 @@ module1.getModule = (url, data) => {
 			method: 'get',
 			baseURL: process.env.VUE_APP_BASE_URL,
 			url,
-			params: { ...data },
+			params: {
+				...data
+			},
 		});
 	} catch (error) {
 		return console.error(`[API][module1] getModule is failed url: ${url}, error: ${error}`);
@@ -32,7 +34,7 @@ module1.putModule = (url, data) => {
 	try {
 		return axios({
 			method: 'put',
-			baseURL: process.env.VUE_APP_BASEURL,
+			baseURL: process.env.VUE_APP_BASE_URL,
 			url,
 			data,
 		});
@@ -45,7 +47,7 @@ module1.patchModule = (url, data) => {
 	try {
 		return axios({
 			method: 'patch',
-			baseURL: process.env.VUE_APP_BASEURL,
+			baseURL: process.env.VUE_APP_BASE_URL,
 			url,
 			data,
 		});
@@ -58,7 +60,7 @@ module1.deleteModule = (url) => {
 	try {
 		return axios({
 			method: 'delete',
-			baseURL: process.env.VUE_APP_BASEURL,
+			baseURL: process.env.VUE_APP_BASE_URL,
 			url,
 		});
 	} catch (error) {

@@ -57,6 +57,34 @@ const mutations = {
 			console.error(`[commonMutationType.SET_BOARD_ADD] error: ${e}`);
 		}
 	},
+	/**
+	 * @description 게시글 수정
+	 * @param state
+	 * @param payload 전달 받은 값: object
+	 */
+	[commonMutationType.SET_BOARD_UPDATE](state, payload) {
+		try {
+			if (typeof payload === 'object') {
+				state.boardUpdate = payload;
+			}
+		} catch (e) {
+			console.error(`[commonMutationType.SET_BOARD_UPDATE] error: ${e}`);
+		}
+	},
+	/**
+	 * @description 게시글 삭제
+	 * @param state
+	 * @param payload 전달 받은 값: object
+	 */
+	[commonMutationType.SET_BOARD_DELETE](state, payload) {
+		try {
+			if (typeof payload === 'object') {
+				state.boardDelete = payload;
+			}
+		} catch (e) {
+			console.error(`[commonMutationType.SET_BOARD_DELETE] error: ${e}`);
+		}
+	},
 };
 
 export default mutations;

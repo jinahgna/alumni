@@ -19,6 +19,16 @@ const getters = {
 	 * @returns state.screen.boardAdd 게시판 등록 완료 상태
 	 */
 	boardAdd: (state) => state.boardAdd,
+	/**
+	 * @description 게시판 수정
+	 * @returns state.screen.boardUpdate 게시판 수정 완료 상태
+	 */
+	boardUpdate: (state) => state.boardUpdate,
+	/**
+	 * @description 게시판 삭제
+	 * @returns state.screen.boardDelete 게시판 삭제 완료 상태
+	 */
+	boardDelete: (state) => state.boardDelete,
 };
 
 export default getters;

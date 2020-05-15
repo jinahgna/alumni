@@ -8,7 +8,9 @@ const actions = {
 	 * @param commit
 	 * @param payload 전달 받은 값
 	 */
-	async [commonActionType.ACTION_BOARD_LIST]({ commit }, payload) {
+	async [commonActionType.ACTION_BOARD_LIST]({
+		commit
+	}, payload) {
 		try {
 			const boardListData = await apiModule.getModule(payload);
 			commit(commonMutationType.SET_BOARD_LIST, boardListData.data.result);
@@ -21,7 +23,9 @@ const actions = {
 	 * @param commit
 	 * @param payload 전달 받은 값
 	 */
-	async [commonActionType.ACTION_BOARD_DETAIL]({ commit }, payload) {
+	async [commonActionType.ACTION_BOARD_DETAIL]({
+		commit
+	}, payload) {
 		try {
 			const boardViewData = await apiModule.getModule(payload);
 			commit(commonMutationType.SET_BOARD_DETAIL, boardViewData.data.result);
@@ -34,7 +38,9 @@ const actions = {
 	 * @param commit
 	 * @param payload 전달 받은 값
 	 */
-	async [commonActionType.ACTION_BOARD_COMMENT]({ commit }, payload) {
+	async [commonActionType.ACTION_BOARD_COMMENT]({
+		commit
+	}, payload) {
 		try {
 			const boardCommentData = await apiModule.getModule(`/getCommentList?board_id=${payload}`);
 			commit(commonMutationType.SET_BOARD_COMMENT, boardCommentData.data.result);
@@ -45,13 +51,43 @@ const actions = {
 	/**
 	 * @description action 게시판 글 등록
 	 * @param commit
-	 * @param payload 전달 받은 값
+	 * @param payload 전달 받은 값 updateBoard
 	 */
-	async [commonActionType.ACTION_BOARD_ADD]({ commit }, payload) {
+	async [commonActionType.ACTION_BOARD_ADD]({
+		commit
+	}, payload) {
 		try {
 			await apiModule.postModule('/addBoard', payload);
 		} catch (e) {
 			console.log('게시판 등록 실패');
+		}
+	},
+	/**
+	 * @description action 게시판 글 수정
+	 * @param commit
+	 * @param payload 전달 받은 값
+	 */
+	async [commonActionType.ACTION_BOARD_UPDATE]({
+		commit
+	}, payload) {
+		try {
+			await apiModule.postModule('/updateBoard', payload);
+		} catch (e) {
+			console.log('게시판 수정 실패');
+		}
+	},
+	/**
+	 * @description action 게시판 글 삭제
+	 * @param commit
+	 * @param payload 전달 받은 값
+	 */
+	async [commonActionType.ACTION_BOARD_DELETE]({
+		commit
+	}, payload) {
+		try {
+			await apiModule.deleteModule(payload);
+		} catch (e) {
+			console.log('게시판 삭제 실패');
 		}
 	},
 };
