@@ -5,6 +5,9 @@ const state = {
 	boardAdd: {}, // 게시글 등록
 	boardUpdate: {}, // 게시글 수정
 	boardDelete: {}, // 게시글 삭제
+	commentAdd: {}, // 댓글 등록
+	commentUpdate: {}, // 댓글 수정
+	commentDelete: {}, // 댓글 삭제
 };
 
 export default state;

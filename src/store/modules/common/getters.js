@@ -29,6 +29,21 @@ const getters = {
 	 * @returns state.screen.boardDelete 게시판 삭제 완료 상태
 	 */
 	boardDelete: (state) => state.boardDelete,
+	/**
+	 * @description 댓글 등록
+	 * @returns state.screen.commentAdd 댓글 등록 완료 상태
+	 */
+	commentAdd: (state) => state.commentAdd,
+	/**
+	 * @description 댓글 수정
+	 * @returns state.screen.commentUpdate 댓글 수정 완료 상태
+	 */
+	commentUpdate: (state) => state.commentUpdate,
+	/**
+	 * @description 댓글 삭제
+	 * @returns state.screen.commentDelete 댓글 삭제 완료 상태
+	 */
+	commentDelete: (state) => state.commentDelete,
 };
 
 export default getters;
