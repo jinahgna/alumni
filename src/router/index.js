@@ -1,11 +1,12 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import home from '../views/home.vue';
-import join from '../views/join.vue';
+import userInfoWrite from '../views/userInfoWrite.vue';
 import boardList from '../views/boardList.vue';
 import boardDetailView from '../views/boardDetailView.vue';
 import boardWrite from '../views/boardWrite.vue';
 import infoModify from '../views/infoModify.vue';
+import adminUserInfo from '../views/adminUserInfo.vue';
 
 Vue.use(VueRouter);
 
@@ -19,9 +20,9 @@ const routes = [
         component: home,
     },
     {
-        path: '/join',
-        name: 'join',
-        component: join,
+        path: '/userInfoWrite',
+        name: 'userInfoWrite',
+        component: userInfoWrite,
     },
     {
         path: '/boardList',
@@ -42,6 +43,11 @@ const routes = [
         path: '/infoModify',
         name: 'infoModify',
         component: infoModify,
+    },
+    {
+        path: '/adminUserInfo',
+        name: 'adminUserInfo',
+        component: adminUserInfo,
     },
 ];
 

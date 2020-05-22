@@ -20,6 +20,11 @@ const getters = {
      */
     idCheck: (state) => state.idCheck,
     /**
+     * @description 사용자 리스트
+     * @returns state.screen.userList 사용자리스트 조회 완료 상태
+     */
+    userList: (state) => state.userList,
+    /**
      * @description 게시판 등록
      * @returns state.screen.boardAdd 게시판 등록 완료 상태
      */

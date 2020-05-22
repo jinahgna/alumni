@@ -157,6 +157,20 @@ const mutations = {
             console.error(`[commonMutationType.SET_ADD_USER] error: ${e}`);
         }
     },
+    /**
+     * @description 사용자 리스트 설정
+     * @param state
+     * @param payload 전달 받은 값: object
+     */
+    [commonMutationType.SET_USER_LIST](state, payload) {
+        try {
+            if (typeof payload === 'object') {
+                state.userList = payload;
+            }
+        } catch (e) {
+            console.error(`[commonMutationType.SET_USER_LIST] error: ${e}`);
+        }
+    },
 };
 
 export default mutations;

@@ -8,7 +8,9 @@ const actions = {
      * @param commit
      * @param payload 전달 받은 값
      */
-    async [commonActionType.ACTION_BOARD_LIST]({ commit }, payload) {
+    async [commonActionType.ACTION_BOARD_LIST]({
+        commit
+    }, payload) {
         try {
             const boardListData = await apiModule.getModule(payload);
             commit(commonMutationType.SET_BOARD_LIST, boardListData.data.result);
@@ -21,7 +23,9 @@ const actions = {
      * @param commit
      * @param payload 전달 받은 값
      */
-    async [commonActionType.ACTION_BOARD_DETAIL]({ commit }, payload) {
+    async [commonActionType.ACTION_BOARD_DETAIL]({
+        commit
+    }, payload) {
         try {
             const boardViewData = await apiModule.getModule(payload);
             commit(commonMutationType.SET_BOARD_DETAIL, boardViewData.data.result);
@@ -34,7 +38,9 @@ const actions = {
      * @param commit
      * @param payload 전달 받은 값
      */
-    async [commonActionType.ACTION_BOARD_COMMENT]({ commit }, payload) {
+    async [commonActionType.ACTION_BOARD_COMMENT]({
+        commit
+    }, payload) {
         try {
             const boardCommentData = await apiModule.getModule(`/getCommentList?board_id=${payload}`);
             commit(commonMutationType.SET_BOARD_COMMENT, boardCommentData.data.result);
@@ -47,7 +53,9 @@ const actions = {
      * @param commit
      * @param payload 전달 받은 값 updateBoard
      */
-    async [commonActionType.ACTION_BOARD_ADD]({ commit }, payload) {
+    async [commonActionType.ACTION_BOARD_ADD]({
+        commit
+    }, payload) {
         try {
             await apiModule.postModule('/addBoard', payload);
         } catch (e) {
@@ -59,7 +67,9 @@ const actions = {
      * @param commit
      * @param payload 전달 받은 값
      */
-    async [commonActionType.ACTION_BOARD_UPDATE]({ commit }, payload) {
+    async [commonActionType.ACTION_BOARD_UPDATE]({
+        commit
+    }, payload) {
         try {
             await apiModule.postModule('/updateBoard', payload);
         } catch (e) {
@@ -71,7 +81,9 @@ const actions = {
      * @param commit
      * @param payload 전달 받은 값
      */
-    async [commonActionType.ACTION_BOARD_DELETE]({ commit }, payload) {
+    async [commonActionType.ACTION_BOARD_DELETE]({
+        commit
+    }, payload) {
         try {
             await apiModule.deleteModule(payload);
         } catch (e) {
@@ -83,7 +95,9 @@ const actions = {
      * @param commit
      * @param payload 전달 받은 값
      */
-    async [commonActionType.ACTION_COMMENT_ADD]({ commit }, payload) {
+    async [commonActionType.ACTION_COMMENT_ADD]({
+        commit
+    }, payload) {
         try {
             await apiModule.postModule('/addComment', payload);
         } catch (e) {
@@ -95,7 +109,9 @@ const actions = {
      * @param commit
      * @param payload 전달 받은 값
      */
-    async [commonActionType.ACTION_COMMENT_UPDATE]({ commit }, payload) {
+    async [commonActionType.ACTION_COMMENT_UPDATE]({
+        commit
+    }, payload) {
         try {
             await apiModule.postModule('/updateComment', payload);
         } catch (e) {
@@ -107,7 +123,9 @@ const actions = {
      * @param commit
      * @param payload 전달 받은 값
      */
-    async [commonActionType.ACTION_COMMENT_DELETE]({ commit }, payload) {
+    async [commonActionType.ACTION_COMMENT_DELETE]({
+        commit
+    }, payload) {
         try {
             await apiModule.deleteModule(payload);
         } catch (e) {
@@ -119,9 +137,10 @@ const actions = {
      * @param commit
      * @param payload 전달 받은 값
      */
-    async [commonActionType.ACTION_ID_CHECK]({ commit }, payload) {
+    async [commonActionType.ACTION_ID_CHECK]({
+        commit
+    }, payload) {
         try {
-            // await apiModule.postModule('/dupleIdCheck', payload);
             await apiModule.postModule('/dupleIdCheck', payload).then((result) => {
                 commit(commonMutationType.GET_ID_CHECK, result.data.result);
             });
@@ -134,11 +153,29 @@ const actions = {
      * @param commit
      * @param payload 전달 받은 값
      */
-    async [commonActionType.ACTION_ADD_USER]({ commit }, payload) {
+    async [commonActionType.ACTION_ADD_USER]({
+        commit
+    }, payload) {
         try {
             await apiModule.postModule('/addUserInfo', payload);
         } catch (e) {
             console.log('회원가입 실패');
+        }
+    },
+    /**
+     * @description action 사용자 리스트 조회
+     * @param commit
+     * @param payload 전달 받은 값
+     */
+    async [commonActionType.ACTION_USER_LIST]({
+        commit
+    }, payload) {
+        try {
+            await apiModule.getModule('/getUserList').then((result) => {
+                commit(commonMutationType.SET_USER_LIST, result.data.result);
+            });
+        } catch (e) {
+            console.log('사용자 리스트 조회 실패');
         }
     },
 };

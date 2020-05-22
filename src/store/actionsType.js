@@ -14,6 +14,7 @@ const commonActionType = {
     ACTION_COMMENT_DELETE: 'ACTION_COMMENT_DELETE', // 댓글 삭제
     ACTION_ID_CHECK: 'ACTION_ID_CHECK', // 중복아이디 체크
     ACTION_ADD_USER: 'ACTION_ADD_USER', // 회원가입
+    ACTION_USER_LIST: 'ACTION_USER_LIST', // 사용자 목록
 };
 
 export default commonActionType;

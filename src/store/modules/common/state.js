@@ -10,6 +10,7 @@ const state = {
     commentDelete: {}, // 댓글 삭제
     idCheck: false, // 중복 아이디 체크
     userAdd: {}, // 회원가입
+    userList: {}, // 사용자 목록 조회
 };
 
 export default state;

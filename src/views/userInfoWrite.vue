@@ -1,7 +1,9 @@
 <template>
-    <div class="join">
+    <div class="user-info-write">
         <v-text-field label="ID" hide-details="auto" color="#6fd400" v-model="userId"></v-text-field>
-        <v-text-field label="PASSWORD" hide-details="auto" color="#6fd400" v-model="userPassword"></v-text-field>
+        <v-text-field label="PASSWORD" hide-details="auto" color="#6fd400" type="password" v-model="userPassword"></v-text-field>
+        <v-text-field label="PASSWORD CONFIRM" hide-details="auto" color="#6fd400" type="password" v-model="userPasswordConfirm"></v-text-field>
+        <p class="warning-txt" v-if="userPassword !== '' && userPasswordConfirm !== '' && userPassword !== userPasswordConfirm">비밀번호가 일치하지 않습니다.</p>
         <v-text-field label="NAME" hide-details="auto" color="#6fd400" v-model="userName"></v-text-field>
         <v-text-field label="ADDRESS" hide-details="auto" color="#6fd400" v-model="userAddress"></v-text-field>
         <v-text-field label="PHONE" hide-details="auto" color="#6fd400" v-model="userPhone"></v-text-field>
@@ -11,7 +13,7 @@
             <v-radio label="MALE" value="M" color="#6fd400"></v-radio>
         </v-radio-group>
         <div class="wrap-btn">
-            <v-btn x-large color="#6fd400" dark @click="userAdd">join</v-btn>
+            <v-btn x-large color="#6fd400" dark @click="userAdd">userInfoWrite</v-btn>
         </div>
     </div>
 </template>
@@ -23,11 +25,12 @@ import commonMutationType from '@/store/mutationsType';
 import commonActionType from '@/store/actionsType';
 
 export default {
-    name: 'join',
+    name: 'userInfoWrite',
     data() {
         return {
             userId: '',
             userPassword: '',
+            userPasswordConfirm: '',
             userName: '',
             userAddress: '',
             userPhone: '',
@@ -52,10 +55,39 @@ export default {
             const idCheckData = {
                 user_id: this.userId,
             };
+            if (this.userId === '') {
+                alert('아이디를 입력해주세요.');
+                return false;
+            }
+            if (this.userPassword === '') {
+                alert('비밀번호를 입력해주세요.');
+                return false;
+            }
+            if (this.userName === '') {
+                alert('이름을 입력해주세요.');
+                return false;
+            }
+            if (this.userAddress === '') {
+                alert('주소를 입력해주세요.');
+                return false;
+            }
+            if (this.userPhone === '') {
+                alert('핸드폰 번호를 입력해주세요.');
+                return false;
+            }
+            if (this.userEmail === '') {
+                alert('이메일을 입력해주세요.');
+                return false;
+            }
+            if (this.userGender === '') {
+                alert('성별을 입력해주세요.');
+                return false;
+            }
             await this.$store.dispatch(commonActionType.ACTION_ID_CHECK, idCheckData);
             if (this.idCheck === 'true') {
-                console.log('회원가입 가능');
-                console.log('payload', payload);
+                await this.$store.dispatch(commonActionType.ACTION_ADD_USER, payload);
+                alert('회원가입이 완료 되었습니다. 관리자의 승인 후 로그인 가능합니다.');
+                this.$router.replace({ path: `/` });
             } else {
                 alert('중복된 아이디 입니다.');
             }
@@ -64,7 +96,7 @@ export default {
 };
 </script>
 <style scoped>
-.join {
+.user-info-write {
     width: 500px;
     margin: 100px auto;
 }
@@ -74,5 +106,8 @@ export default {
 }
 .wrap-btn button {
     width: 100%;
+}
+.warning-txt {
+    color: #ff0000;
 }
 </style>

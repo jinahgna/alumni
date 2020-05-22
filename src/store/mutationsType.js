@@ -14,6 +14,7 @@ const commonMutationType = {
     SET_COMMENT_DELETE: 'SET_COMMENT_DELETE', // 댓글 삭제
     GET_ID_CHECK: 'GET_ID_CHECK', // 아이디 중복체크
     SET_ADD_USER: 'SET_ADD_USER', // 회원가입
+    SET_USER_LIST: 'SET_USER_LIST', // 사용자 목록 조회
 };
 
 export default commonMutationType;
