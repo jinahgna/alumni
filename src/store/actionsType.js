@@ -15,6 +15,7 @@ const commonActionType = {
     ACTION_ID_CHECK: 'ACTION_ID_CHECK', // 중복아이디 체크
     ACTION_ADD_USER: 'ACTION_ADD_USER', // 회원가입
     ACTION_USER_LIST: 'ACTION_USER_LIST', // 사용자 목록
+    ACTION_UPDATE_PERMISSION: 'ACTION_UPDATE_PERMISSION', // 회원가입 승인
 };
 
 export default commonActionType;

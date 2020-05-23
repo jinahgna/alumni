@@ -171,6 +171,34 @@ const mutations = {
             console.error(`[commonMutationType.SET_USER_LIST] error: ${e}`);
         }
     },
+    /**
+     * @description 회원가입 승인
+     * @param state
+     * @param payload 전달 받은 값: object
+     */
+    [commonMutationType.SET_UPDATE_PERMISSION](state, payload) {
+        try {
+            if (typeof payload === 'object') {
+                state.updatePermission = payload;
+            }
+        } catch (e) {
+            console.error(`[commonMutationType.SET_UPDATE_PERMISSION] error: ${e}`);
+        }
+    },
+    /**
+     * @description 회원가입 승인
+     * @param state
+     * @param payload 전달 받은 값: object
+     */
+    [commonMutationType.SET_LOGIN](state, payload) {
+        try {
+            if (typeof payload === 'object') {
+                state.login = payload;
+            }
+        } catch (e) {
+            console.error(`[commonMutationType.SET_LOGIN] error: ${e}`);
+        }
+    },
 };
 
 export default mutations;

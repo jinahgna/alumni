@@ -25,6 +25,11 @@ const getters = {
      */
     userList: (state) => state.userList,
     /**
+     * @description 로그인 여부 조회
+     * @returns state.screen.login 로그인 상태
+     */
+    login: (state) => state.login,
+    /**
      * @description 게시판 등록
      * @returns state.screen.boardAdd 게시판 등록 완료 상태
      */

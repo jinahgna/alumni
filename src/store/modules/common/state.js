@@ -11,6 +11,8 @@ const state = {
     idCheck: false, // 중복 아이디 체크
     userAdd: {}, // 회원가입
     userList: {}, // 사용자 목록 조회
+    updatePermission: {}, // 회원가입 승인
+    login: {}, // 로그인
 };
 
 export default state;
