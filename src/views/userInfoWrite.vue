@@ -36,12 +36,22 @@ export default {
             userPhone: '',
             userEmail: '',
             userGender: '',
+            loginInfo: '',
         };
+    },
+    mounted() {
+        // this.loadView();
     },
     computed: {
         ...mapGetters(['idCheck']),
     },
     methods: {
+        // loadView() {
+        //     this.loginInfo = this.$store.state.common.login;
+        //     console.log('loginInfo', this.loginInfo);
+        //     if (this.loginInfo.idx !== undefined) {
+        //     }
+        // },
         async userAdd() {
             const payload = {
                 user_id: this.userId,

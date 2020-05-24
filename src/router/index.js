@@ -5,7 +5,6 @@ import userInfoWrite from '../views/userInfoWrite.vue';
 import boardList from '../views/boardList.vue';
 import boardDetailView from '../views/boardDetailView.vue';
 import boardWrite from '../views/boardWrite.vue';
-import infoModify from '../views/infoModify.vue';
 import adminUserInfo from '../views/adminUserInfo.vue';
 
 Vue.use(VueRouter);
@@ -38,11 +37,6 @@ const routes = [
         path: '/boardWrite',
         name: 'boardWrite',
         component: boardWrite,
-    },
-    {
-        path: '/infoModify',
-        name: 'infoModify',
-        component: infoModify,
     },
     {
         path: '/adminUserInfo',

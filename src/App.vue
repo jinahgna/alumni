@@ -15,7 +15,6 @@
                 <li>
                     <router-link to="/adminUserInfo">관리자</router-link>
                 </li>
-                <!-- <li><router-link to="/infoModify">내정보수정</router-link></li>-->
             </ul>
         </div>
         <v-content>

@@ -5,6 +5,11 @@ const getters = {
      */
     boardListData: (state) => state.boardListData,
     /**
+     * @description 공지사항 리스트 조회
+     * @returns state.screen.boardViewData 리스트 조회 완료 상태
+     */
+    noticeListData: (state) => state.noticeListData,
+    /**
      * @description 게시판 상세 조회
      * @returns state.screen.boardViewData 게시판 상세 조회 완료 상태
      */

@@ -4,6 +4,7 @@
 
 const commonMutationType = {
     SET_BOARD_LIST: 'SET_BOARD_LIST', // 게시글 리스트
+    SET_NOTICE_LIST: 'SET_NOTICE_LIST', // 공지사항 리스트
     SET_BOARD_DETAIL: 'SET_BOARD_DETAIL', // 게시글 상세
     SET_BOARD_COMMENT: 'SET_BOARD_COMMENT', // 게시글 댓글
     SET_BOARD_ADD: 'SET_BOARD_ADD', // 게시글 등록
@@ -16,6 +17,7 @@ const commonMutationType = {
     SET_ADD_USER: 'SET_ADD_USER', // 회원가입
     SET_USER_LIST: 'SET_USER_LIST', // 사용자 목록 조회
     SET_UPDATE_PERMISSION: 'SET_UPDATE_PERMISSION', // 회원가입 승인
+    SET_LOGIN: 'SET_LOGIN', // 로그인
 };
 
 export default commonMutationType;

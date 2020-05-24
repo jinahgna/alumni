@@ -4,6 +4,7 @@
 
 const commonActionType = {
     ACTION_BOARD_LIST: 'ACTION_BOARD_LIST', // 게시글 리스트 조회
+    ACTION_NOTICE_LIST: 'ACTION_NOTICE_LIST', // 공지사항 리스트 조회
     ACTION_BOARD_DETAIL: 'ACTION_BOARD_DETAIL', // 게시글 상세 조회
     ACTION_BOARD_COMMENT: 'ACTION_BOARD_COMMENT', // 댓글 조회
     ACTION_BOARD_ADD: 'ACTION_BOARD_ADD', // 게시물 등록
@@ -16,6 +17,7 @@ const commonActionType = {
     ACTION_ADD_USER: 'ACTION_ADD_USER', // 회원가입
     ACTION_USER_LIST: 'ACTION_USER_LIST', // 사용자 목록
     ACTION_UPDATE_PERMISSION: 'ACTION_UPDATE_PERMISSION', // 회원가입 승인
+    ACTION_LOGIN: 'ACTION_LOGIN', // 로그인
 };
 
 export default commonActionType;

@@ -10,7 +10,6 @@
 				<col style="width:40%;" />
 				<col style="width:20%" />
 				<col width="*" />
-				<col width="*" />
 			</colgroup>
 			<thead>
 				<tr>
@@ -18,10 +17,19 @@
 					<th>제목</th>
 					<th class="text-center">작성자</th>
 					<th class="text-center">작성일</th>
-					<th class="text-center">수정일</th>
 				</tr>
 			</thead>
 			<tbody>
+				<template v-if="this.boardType === 'notice' && this.boardNum === '0'">
+					<tr v-for="(noticeList, index) in noticeListData" :key="index + '_' + index" class="notice-list">
+						<td class="text-center">{{ noticeList.rownum }}</td>
+						<td>
+							<a v-on:click="goDetailView(boardType, noticeList.idx)">{{ noticeList.title }} ({{ noticeList.comm_cnt }})</a>
+						</td>
+						<td class="text-center">{{ noticeList.author }}</td>
+						<td class="text-center">{{ noticeList.reg_date }}</td>
+					</tr>
+				</template>
 				<tr v-for="(list, index) in boardListData.boardList" :key="index">
 					<td class="text-center">{{ list.rownum }}</td>
 					<td>
@@ -29,7 +37,6 @@
 					</td>
 					<td class="text-center">{{ list.author }}</td>
 					<td class="text-center">{{ list.reg_date }}</td>
-					<td class="text-center">{{ list.update_date }}</td>
 				</tr>
 			</tbody>
 		</v-simple-table>
@@ -49,7 +56,7 @@
 			</div>
 		</div>
 		<!-- // pagination -->
-		<div class="text-right mt-5">
+		<div class="text-right mt-5" v-if="this.authorId !== undefined">
 			<v-btn depressed small color="#6fd400" dark @click="write">글쓰기</v-btn>
 		</div>
 	</v-container>
@@ -65,6 +72,7 @@ export default {
 	name: 'boardList',
 	data() {
 		return {
+			authorId: this.$store.state.common.login.idx,
 			title: '',
 			boardType: '',
 			totalNum: 0,
@@ -79,7 +87,7 @@ export default {
 		};
 	},
 	computed: {
-		...mapGetters(['boardListData']),
+		...mapGetters(['boardListData', 'noticeListData']),
 	},
 	mounted() {
 		const query = qs.parse(window.location.search, { ignoreQueryPrefix: true });
@@ -87,6 +95,7 @@ export default {
 		this.boardNum = query.num;
 		this.title = this.boardType === 'notice' ? '공지사항' : '자유게시판';
 		this.loadView();
+		console.log('authorId', this.authorId);
 	},
 	updated() {},
 	methods: {
@@ -94,6 +103,7 @@ export default {
 		async loadView() {
 			this.url = `/getBoardList?type=${this.boardType}&num=`;
 			const payload = `${this.url}${this.boardNum}`;
+			await this.$store.dispatch(commonActionType.ACTION_NOTICE_LIST);
 			await this.$store.dispatch(commonActionType.ACTION_BOARD_LIST, payload);
 			this.totalNum = this.$store.state.common.boardListData.totNum;
 			this.pagingListNum = Math.ceil(this.totalNum / 10);
@@ -194,6 +204,9 @@ table a {
 .theme--light.v-data-table tbody tr:not(:last-child) td:not(.v-data-table__mobile-row),
 .theme--light.v-data-table tbody tr:not(:last-child) th:not(.v-data-table__mobile-row) {
 	max-width: 300px;
+}
+.notice-list {
+	background-color: #f5f9f1;
 }
 .paging-area {
 	width: 100%;

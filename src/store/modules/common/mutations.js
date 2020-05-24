@@ -18,6 +18,20 @@ const mutations = {
         }
     },
     /**
+     * @description 공지사항 리스트 설정
+     * @param state
+     * @param payload 전달 받은 값: object
+     */
+    [commonMutationType.SET_NOTICE_LIST](state, payload) {
+        try {
+            if (typeof payload === 'object') {
+                state.noticeListData = payload;
+            }
+        } catch (e) {
+            console.error(`[commonMutationType.SET_NOTICE_LIST] error: ${e}`);
+        }
+    },
+    /**
      * @description 게시글 상세
      * @param state
      * @param payload 전달 받은 값: object
@@ -186,7 +200,7 @@ const mutations = {
         }
     },
     /**
-     * @description 회원가입 승인
+     * @description 로그인
      * @param state
      * @param payload 전달 받은 값: object
      */

@@ -37,14 +37,14 @@
                                     <strong>{{ list.author }}</strong>
                                     <span>{{ list.reg_date }}</span>
                                     <p>{{ list.content }}</p>
-                                    <div class="text-right" v-if="list.author_id === author_id">
+                                    <div class="text-right" v-if="list.author_id === authorId">
                                         <v-btn depressed small color="#6fd400" dark class="mr-1" @click="commentModify(list)">수정</v-btn>
                                         <v-btn depressed small color="#ccc" dark @click="commentDelete(list)">삭제</v-btn>
                                     </div>
                                 </li>
                             </ul>
                             <!-- //comment list -->
-                            <div class="comment-write">
+                            <div class="comment-write" v-if="authorId !== undefined">
                                 <textarea name id cols="5" rows="3" v-model="commentText"></textarea>
                                 <div class="text-right">
                                     <v-btn depressed small color="#6fd400" dark @click="commentWrite(isCommentWrite)">{{ commentBtn }}</v-btn>
@@ -57,7 +57,7 @@
             </template>
         </v-simple-table>
         <!-- button area -->
-        <div class="text-right" v-if="boardViewData.author_id === author_id">
+        <div class="text-right" v-if="boardViewData.author_id === authorId">
             <v-btn depressed small color="#6fd400" dark class="mr-1" @click="modify">수정</v-btn>
             <v-btn depressed small color="#6fd400" dark @click="deleteBoard">삭제</v-btn>
         </div>
@@ -75,9 +75,9 @@ export default {
     name: 'BoardDetailView',
     data() {
         return {
+            authorId: this.$store.state.common.login.idx,
             title: '',
             boardId: '',
-            author_id: 23, // 임시
             commentText: '',
             modifyOpen: false,
             isCommentWrite: true,
@@ -120,7 +120,7 @@ export default {
                 const payload = {
                     content: this.commentText,
                     board_id: this.boardId,
-                    author_id: this.author_id, // 임시
+                    author_id: this.authorId,
                 };
                 await this.$store.dispatch(commonActionType.ACTION_COMMENT_ADD, payload);
                 alert('댓글 등록이 완료되었습니다.');
