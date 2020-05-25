@@ -113,8 +113,10 @@ export default {
 			}
 		},
 		async loadView() {
-			this.url = `/getBoardDetail?type=${this.boardType}&board_id=`;
-			const payload = `${this.url}${this.boardId}`;
+			const payload = {
+				type: this.boardType,
+				board_id: this.boardId,
+			};
 			await this.$store.dispatch(commonActionType.ACTION_BOARD_DETAIL, payload);
 		},
 	},

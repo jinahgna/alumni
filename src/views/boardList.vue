@@ -101,8 +101,10 @@ export default {
 	methods: {
 		// api 호출
 		async loadView() {
-			this.url = `/getBoardList?type=${this.boardType}&num=`;
-			const payload = `${this.url}${this.boardNum}`;
+			const payload = {
+				type: this.boardType,
+				num: this.boardNum,
+			};
 			await this.$store.dispatch(commonActionType.ACTION_NOTICE_LIST);
 			await this.$store.dispatch(commonActionType.ACTION_BOARD_LIST, payload);
 			this.totalNum = this.$store.state.common.boardListData.totNum;

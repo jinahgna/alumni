@@ -16,6 +16,9 @@ const commonMutationType = {
     GET_ID_CHECK: 'GET_ID_CHECK', // 아이디 중복체크
     SET_ADD_USER: 'SET_ADD_USER', // 회원가입
     SET_USER_LIST: 'SET_USER_LIST', // 사용자 목록 조회
+    SET_USER_DETAIL: 'SET_USER_DETAIL', // 사용자 상세 조회
+    SET_USER_UPDATE: 'SET_USER_UPDATE', // 사용자 정보 수정
+    SET_USER_DELETE: 'SET_USER_DELETE', // 사용자 정보 삭제
     SET_UPDATE_PERMISSION: 'SET_UPDATE_PERMISSION', // 회원가입 승인
     SET_LOGIN: 'SET_LOGIN', // 로그인
 };

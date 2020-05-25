@@ -12,6 +12,9 @@ const state = {
     idCheck: false, // 중복 아이디 체크
     userAdd: {}, // 회원가입
     userList: {}, // 사용자 목록 조회
+    userDetail: {}, // 사용자 상세 조회
+    userUpdate: {}, // 사용자 정보 수정
+    userDelete: {}, // 사용자 정보 삭제
     updatePermission: {}, // 회원가입 승인
     login: {}, // 로그인
 };

@@ -186,6 +186,48 @@ const mutations = {
         }
     },
     /**
+     * @description 사용자 상세 설정
+     * @param state
+     * @param payload 전달 받은 값: object
+     */
+    [commonMutationType.SET_USER_DETAIL](state, payload) {
+        try {
+            if (typeof payload === 'object') {
+                state.userDetail = payload;
+            }
+        } catch (e) {
+            console.error(`[commonMutationType.SET_USER_DETAIL] error: ${e}`);
+        }
+    },
+    /**
+     * @description 사용자 정보수정 설정
+     * @param state
+     * @param payload 전달 받은 값: object
+     */
+    [commonMutationType.SET_USER_UPDATE](state, payload) {
+        try {
+            if (typeof payload === 'object') {
+                state.userUpdate = payload;
+            }
+        } catch (e) {
+            console.error(`[commonMutationType.SET_USER_UPDATE] error: ${e}`);
+        }
+    },
+    /**
+     * @description 회원정보 삭제
+     * @param state
+     * @param payload 전달 받은 값: object
+     */
+    [commonMutationType.SET_USER_DELETE](state, payload) {
+        try {
+            if (typeof payload === 'object') {
+                state.userDelete = payload;
+            }
+        } catch (e) {
+            console.error(`[commonMutationType.SET_USER_DELETE] error: ${e}`);
+        }
+    },
+    /**
      * @description 회원가입 승인
      * @param state
      * @param payload 전달 받은 값: object
