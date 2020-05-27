@@ -2,7 +2,7 @@
     <div class="user-info-write">
         <v-text-field label="ID" hide-details="auto" color="#6fd400" clearable v-if="authorId === undefined" v-model="userId"></v-text-field>
         <v-text-field label="ID" hide-details="auto" color="#6fd400" clearable v-if="authorId !== undefined" v-model="userId" disabled></v-text-field>
-        <v-text-field label="PASSWORD" hide-details="auto" color="#6fd400" clearable type="password" v-if="authorId === undefined" v-model="userPassword"></v-text-field>
+        <v-text-field label="PASSWORD" hide-details="auto" color="#6fd400" autocomplete="new-password" clearable type="password" v-if="authorId === undefined" v-model="userPassword"></v-text-field>
         <v-text-field label="PASSWORD CONFIRM" hide-details="auto" color="#6fd400" clearable type="password" v-if="authorId === undefined" v-model="userPasswordConfirm" :rules="[() => (userPassword !== '' && userPasswordConfirm !== '' && userPassword === userPasswordConfirm) || '비밀번호가 일치하지 않습니다.']"></v-text-field>
         <v-text-field label="NAME" hide-details="auto" color="#6fd400" clearable v-model="userName"></v-text-field>
         <v-text-field label="ADDRESS" hide-details="auto" color="#6fd400" clearable v-model="userAddress"></v-text-field>
