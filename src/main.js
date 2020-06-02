@@ -1,3 +1,4 @@
+import '@babel/polyfill';
 import Vue from 'vue';
 import dotenv from 'dotenv';
 import axios from 'axios';
@@ -19,8 +20,8 @@ Vue.config.productionTip = false;
 Vue.use(globalFunctions);
 
 new Vue({
-    router,
-    store,
-    vuetify,
-    render: (h) => h(App),
+	router,
+	store,
+	vuetify,
+	render: (h) => h(App),
 }).$mount('#app');

@@ -8,7 +8,9 @@ const actions = {
 	 * @param commit
 	 * @param payload 전달 받은 값
 	 */
-	async [commonActionType.ACTION_BOARD_LIST]({ commit }, payload) {
+	async [commonActionType.ACTION_BOARD_LIST]({
+		commit
+	}, payload) {
 		try {
 			await apiModule.getModule('/getBoardList', payload).then((result) => {
 				commit(commonMutationType.SET_BOARD_LIST, result.data.result);
@@ -22,7 +24,9 @@ const actions = {
 	 * @param commit
 	 * @param payload 전달 받은 값
 	 */
-	async [commonActionType.ACTION_NOTICE_LIST]({ commit }, payload) {
+	async [commonActionType.ACTION_NOTICE_LIST]({
+		commit
+	}, payload) {
 		try {
 			await apiModule.getModule('/getNoticeList', payload).then((result) => {
 				commit(commonMutationType.SET_NOTICE_LIST, result.data.result);
@@ -36,7 +40,9 @@ const actions = {
 	 * @param commit
 	 * @param payload 전달 받은 값
 	 */
-	async [commonActionType.ACTION_BOARD_DETAIL]({ commit }, payload) {
+	async [commonActionType.ACTION_BOARD_DETAIL]({
+		commit
+	}, payload) {
 		try {
 			await apiModule.getModule('/getBoardDetail', payload).then((result) => {
 				commit(commonMutationType.SET_BOARD_DETAIL, result.data.result);
@@ -50,7 +56,9 @@ const actions = {
 	 * @param commit
 	 * @param payload 전달 받은 값
 	 */
-	async [commonActionType.ACTION_BOARD_COMMENT]({ commit }, payload) {
+	async [commonActionType.ACTION_BOARD_COMMENT]({
+		commit
+	}, payload) {
 		try {
 			await apiModule.getModule('/getCommentList', payload).then((result) => {
 				commit(commonMutationType.SET_BOARD_COMMENT, result.data.result);
@@ -64,7 +72,9 @@ const actions = {
 	 * @param commit
 	 * @param payload 전달 받은 값 updateBoard
 	 */
-	async [commonActionType.ACTION_BOARD_ADD]({ commit }, payload) {
+	async [commonActionType.ACTION_BOARD_ADD]({
+		commit
+	}, payload) {
 		try {
 			await apiModule.postModule('/addBoard', payload);
 		} catch (e) {
@@ -76,7 +86,9 @@ const actions = {
 	 * @param commit
 	 * @param payload 전달 받은 값
 	 */
-	async [commonActionType.ACTION_BOARD_UPDATE]({ commit }, payload) {
+	async [commonActionType.ACTION_BOARD_UPDATE]({
+		commit
+	}, payload) {
 		try {
 			await apiModule.postModule('/updateBoard', payload);
 		} catch (e) {
@@ -88,7 +100,9 @@ const actions = {
 	 * @param commit
 	 * @param payload 전달 받은 값
 	 */
-	async [commonActionType.ACTION_BOARD_DELETE]({ commit }, payload) {
+	async [commonActionType.ACTION_BOARD_DELETE]({
+		commit
+	}, payload) {
 		try {
 			await apiModule.deleteModule(payload);
 		} catch (e) {
@@ -100,7 +114,9 @@ const actions = {
 	 * @param commit
 	 * @param payload 전달 받은 값
 	 */
-	async [commonActionType.ACTION_COMMENT_ADD]({ commit }, payload) {
+	async [commonActionType.ACTION_COMMENT_ADD]({
+		commit
+	}, payload) {
 		try {
 			await apiModule.postModule('/addComment', payload);
 		} catch (e) {
@@ -112,7 +128,9 @@ const actions = {
 	 * @param commit
 	 * @param payload 전달 받은 값
 	 */
-	async [commonActionType.ACTION_COMMENT_UPDATE]({ commit }, payload) {
+	async [commonActionType.ACTION_COMMENT_UPDATE]({
+		commit
+	}, payload) {
 		try {
 			await apiModule.postModule('/updateComment', payload);
 		} catch (e) {
@@ -124,7 +142,9 @@ const actions = {
 	 * @param commit
 	 * @param payload 전달 받은 값
 	 */
-	async [commonActionType.ACTION_COMMENT_DELETE]({ commit }, payload) {
+	async [commonActionType.ACTION_COMMENT_DELETE]({
+		commit
+	}, payload) {
 		try {
 			await apiModule.deleteModule(payload);
 		} catch (e) {
@@ -136,7 +156,9 @@ const actions = {
 	 * @param commit
 	 * @param payload 전달 받은 값
 	 */
-	async [commonActionType.ACTION_ID_CHECK]({ commit }, payload) {
+	async [commonActionType.ACTION_ID_CHECK]({
+		commit
+	}, payload) {
 		try {
 			await apiModule.postModule('/dupleIdCheck', payload).then((result) => {
 				commit(commonMutationType.GET_ID_CHECK, result.data.result);
@@ -150,7 +172,9 @@ const actions = {
 	 * @param commit
 	 * @param payload 전달 받은 값
 	 */
-	async [commonActionType.ACTION_ADD_USER]({ commit }, payload) {
+	async [commonActionType.ACTION_ADD_USER]({
+		commit
+	}, payload) {
 		try {
 			await apiModule.postModule('/addUserInfo', payload);
 		} catch (e) {
@@ -162,7 +186,9 @@ const actions = {
 	 * @param commit
 	 * @param payload 전달 받은 값
 	 */
-	async [commonActionType.ACTION_USER_LIST]({ commit }, payload) {
+	async [commonActionType.ACTION_USER_LIST]({
+		commit
+	}, payload) {
 		try {
 			await apiModule.getModule('/getUserList').then((result) => {
 				commit(commonMutationType.SET_USER_LIST, result.data.result);
@@ -176,7 +202,9 @@ const actions = {
 	 * @param commit
 	 * @param payload 전달 받은 값
 	 */
-	async [commonActionType.ACTION_USER_DETAIL]({ commit }, payload) {
+	async [commonActionType.ACTION_USER_DETAIL]({
+		commit
+	}, payload) {
 		try {
 			await apiModule.getModule('/getUserInfo', payload).then((result) => {
 				commit(commonMutationType.SET_USER_DETAIL, result.data.result);
@@ -190,7 +218,9 @@ const actions = {
 	 * @param commit
 	 * @param payload 전달 받은 값
 	 */
-	async [commonActionType.ACTION_USER_UPDATE]({ commit }, payload) {
+	async [commonActionType.ACTION_USER_UPDATE]({
+		commit
+	}, payload) {
 		try {
 			await apiModule.postModule('/updateUserInfo', payload);
 		} catch (e) {
@@ -202,7 +232,9 @@ const actions = {
 	 * @param commit
 	 * @param payload 전달 받은 값
 	 */
-	async [commonActionType.ACTION_USER_DELETE]({ commit }, payload) {
+	async [commonActionType.ACTION_USER_DELETE]({
+		commit
+	}, payload) {
 		try {
 			await apiModule.deleteModule(payload);
 		} catch (e) {
@@ -214,7 +246,9 @@ const actions = {
 	 * @param commit
 	 * @param payload 전달 받은 값
 	 */
-	async [commonActionType.ACTION_UPDATE_PERMISSION]({ commit }, payload) {
+	async [commonActionType.ACTION_UPDATE_PERMISSION]({
+		commit
+	}, payload) {
 		try {
 			await apiModule.postModule('/updatePermission', payload);
 		} catch (e) {
@@ -226,7 +260,9 @@ const actions = {
 	 * @param commit
 	 * @param payload 전달 받은 값
 	 */
-	async [commonActionType.ACTION_LOGIN]({ commit }, payload) {
+	async [commonActionType.ACTION_LOGIN]({
+		commit
+	}, payload) {
 		try {
 			await apiModule.getModule('/login', payload).then((result) => {
 				commit(commonMutationType.SET_LOGIN, result.data.result);

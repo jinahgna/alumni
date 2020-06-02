@@ -1,4 +1,5 @@
 const path = require('path');
+const ansiRegex = require('ansi-regex')
 
 module.exports = {
 	configureWebpack: {
@@ -10,4 +11,5 @@ module.exports = {
 		},
 	},
 	transpileDependencies: ['vuetify'],
+	transpileDependencies: [ansiRegex],
 };
