@@ -17,6 +17,7 @@ const state = {
     userDelete: {}, // 사용자 정보 삭제
     updatePermission: {}, // 회원가입 승인
     login: {}, // 로그인
+    isLogin: false,
 };
 
 export default state;

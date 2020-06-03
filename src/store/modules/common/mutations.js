@@ -255,6 +255,20 @@ const mutations = {
             console.error(`[commonMutationType.SET_LOGIN] error: ${e}`);
         }
     },
+    /**
+     * @description 로그인
+     * @param state
+     * @param payload 전달 받은 값: object
+     */
+    [commonMutationType.SET_IS_LOGIN](state, payload) {
+        try {
+            if (typeof payload === 'boolean') {
+                state.isLogin = payload;
+            }
+        } catch (e) {
+            console.error(`[commonMutationType.SET_LOGIN] error: ${e}`);
+        }
+    },
 };
 
 export default mutations;

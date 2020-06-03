@@ -266,6 +266,7 @@ const actions = {
 		try {
 			await apiModule.getModule('/login', payload).then((result) => {
 				commit(commonMutationType.SET_LOGIN, result.data.result);
+				commit(commonMutationType.SET_IS_LOGIN, result.data.login_status);
 			});
 		} catch (e) {
 			console.log('로그인 실패');

@@ -20,7 +20,8 @@ const commonMutationType = {
     SET_USER_UPDATE: 'SET_USER_UPDATE', // 사용자 정보 수정
     SET_USER_DELETE: 'SET_USER_DELETE', // 사용자 정보 삭제
     SET_UPDATE_PERMISSION: 'SET_UPDATE_PERMISSION', // 회원가입 승인
-    SET_LOGIN: 'SET_LOGIN', // 로그인
+    SET_LOGIN: 'SET_LOGIN', // 로그인 정보
+    SET_IS_LOGIN: 'SET_IS_LOGIN', // 로그인 여부
 };
 
 export default commonMutationType;

@@ -1,10 +1,8 @@
 <template>
-	<v-container class="board-list">
+	<v-container class="board-list" v-if="isLogin">
 		<h2>{{ this.title }}</h2>
 		<v-simple-table>
-			<caption>
-				게시판 리스트
-			</caption>
+			<caption>게시판 리스트</caption>
 			<colgroup>
 				<col style="width:80px" />
 				<col />
@@ -21,10 +19,15 @@
 			</thead>
 			<tbody>
 				<template v-if="this.boardType === 'notice' && this.boardNum === '0'">
-					<tr v-for="(noticeList, index) in noticeListData" :key="index + '_' + index" class="notice-list">
+					<tr
+						v-for="(noticeList, index) in noticeListData"
+						:key="index + '_' + index"
+						class="notice-list"
+					>
 						<td class="text-center">{{ noticeList.rownum }}</td>
 						<td>
-							<a v-on:click="goDetailView(boardType, noticeList.idx)">{{ noticeList.title }}</a> <span>({{ noticeList.comm_cnt }})</span>
+							<a v-on:click="goDetailView(boardType, noticeList.idx)">{{ noticeList.title }}</a>
+							<span>({{ noticeList.comm_cnt }})</span>
 						</td>
 						<td class="text-center">{{ noticeList.author }}</td>
 						<td class="text-center">{{ noticeList.reg_date }}</td>
@@ -33,7 +36,8 @@
 				<tr v-for="(list, index) in boardListData.boardList" :key="index">
 					<td class="text-center">{{ list.rownum }}</td>
 					<td>
-						<a v-on:click="goDetailView(boardType, list.idx)">{{ list.title }}</a> <span>({{ list.comm_cnt }})</span>
+						<a v-on:click="goDetailView(boardType, list.idx)">{{ list.title }}</a>
+						<span>({{ list.comm_cnt }})</span>
 					</td>
 					<td class="text-center">{{ list.author }}</td>
 					<td class="text-center">{{ list.reg_date }}</td>
@@ -46,7 +50,13 @@
 				<a v-if="firstFlag === true" href="javascript:;" @click="goPaging('first')">&lt;&lt;</a>
 				<a v-if="prevFlag === true" href="javascript:;" @click="goPaging('prev')">&lt;</a>
 				<ul>
-					<li v-for="(v, i) in numberArr" v-bind:key="v" v-bind:item="v" v-bind:index="i" style="display:inline-block">
+					<li
+						v-for="(v, i) in numberArr"
+						v-bind:key="v"
+						v-bind:item="v"
+						v-bind:index="i"
+						style="display:inline-block"
+					>
 						<a v-if="Number(boardNum) !== v - 1" href="javascript:;" @click="goPaging(v)">{{ v }}</a>
 						<span v-if="Number(boardNum) === v - 1">{{ v }}</span>
 					</li>
@@ -56,7 +66,7 @@
 			</div>
 		</div>
 		<!-- // pagination -->
-		<div class="text-right mt-5" v-if="this.authorId !== undefined">
+		<div class="text-right mt-5">
 			<v-btn depressed small color="#6fd400" dark @click="write">글쓰기</v-btn>
 		</div>
 	</v-container>
@@ -72,6 +82,7 @@ export default {
 	name: 'boardList',
 	data() {
 		return {
+			isLogin: this.$store.state.common.isLogin,
 			authorId: this.$store.state.common.login.idx,
 			title: '',
 			boardType: '',
@@ -90,12 +101,15 @@ export default {
 		...mapGetters(['boardListData', 'noticeListData']),
 	},
 	mounted() {
+		if (this.isLogin === false) {
+			alert('로그인 후 이용해주세요.');
+			this.$router.push({ path: '/' });
+		}
 		const query = qs.parse(window.location.search, { ignoreQueryPrefix: true });
 		this.boardType = query.type;
 		this.boardNum = query.num;
 		this.title = this.boardType === 'notice' ? '공지사항' : '자유게시판';
 		this.loadView();
-		console.log('authorId', this.authorId);
 	},
 	updated() {},
 	methods: {
