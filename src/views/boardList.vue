@@ -129,7 +129,7 @@ export default {
 		getTotalNum() {
 			// 선택된 페이징의 번호가 5 이하일 경우
 			if (this.boardNum <= 4) {
-				if (this.pagingListNum > 4) {
+				if (this.pagingListNum > 5) {
 					for (let i = 1; i <= 5; i += 1) {
 						this.arrPagingNum.push(i);
 					}
