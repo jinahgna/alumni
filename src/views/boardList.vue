@@ -2,7 +2,9 @@
 	<v-container class="board-list" v-if="isLogin">
 		<h2>{{ this.title }}</h2>
 		<v-simple-table>
-			<caption>게시판 리스트</caption>
+			<caption>
+				게시판 리스트
+			</caption>
 			<colgroup>
 				<col style="width:80px" />
 				<col />
@@ -19,11 +21,7 @@
 			</thead>
 			<tbody>
 				<template v-if="this.boardType === 'notice' && this.boardNum === '0'">
-					<tr
-						v-for="(noticeList, index) in noticeListData"
-						:key="index + '_' + index"
-						class="notice-list"
-					>
+					<tr v-for="(noticeList, index) in noticeListData" :key="index + '_' + index" class="notice-list">
 						<td class="text-center">{{ noticeList.rownum }}</td>
 						<td>
 							<a v-on:click="goDetailView(boardType, noticeList.idx)">{{ noticeList.title }}</a>
@@ -50,13 +48,7 @@
 				<a v-if="firstFlag === true" href="javascript:;" @click="goPaging('first')">&lt;&lt;</a>
 				<a v-if="prevFlag === true" href="javascript:;" @click="goPaging('prev')">&lt;</a>
 				<ul>
-					<li
-						v-for="(v, i) in numberArr"
-						v-bind:key="v"
-						v-bind:item="v"
-						v-bind:index="i"
-						style="display:inline-block"
-					>
+					<li v-for="(v, i) in numberArr" v-bind:key="v" v-bind:item="v" v-bind:index="i" style="display:inline-block">
 						<a v-if="Number(boardNum) !== v - 1" href="javascript:;" @click="goPaging(v)">{{ v }}</a>
 						<span v-if="Number(boardNum) === v - 1">{{ v }}</span>
 					</li>
@@ -82,8 +74,8 @@ export default {
 	name: 'boardList',
 	data() {
 		return {
-			isLogin: this.$store.state.common.isLogin,
-			authorId: this.$store.state.common.login.idx,
+			isLogin: JSON.parse(sessionStorage.getItem('isLogin')),
+			authorId: '',
 			title: '',
 			boardType: '',
 			totalNum: 0,
@@ -101,15 +93,18 @@ export default {
 		...mapGetters(['boardListData', 'noticeListData']),
 	},
 	mounted() {
-		if (this.isLogin === false) {
+		if (this.isLogin === null) {
 			alert('로그인 후 이용해주세요.');
 			this.$router.push({ path: '/' });
+		} else {
+			this.authorId = JSON.parse(sessionStorage.getItem('loginInfo')).idx;
+			this.$store.commit(commonMutationType.SET_IS_LOGIN, true);
+			const query = qs.parse(window.location.search, { ignoreQueryPrefix: true });
+			this.boardType = query.type;
+			this.boardNum = query.num;
+			this.title = this.boardType === 'notice' ? '공지사항' : '자유게시판';
+			this.loadView();
 		}
-		const query = qs.parse(window.location.search, { ignoreQueryPrefix: true });
-		this.boardType = query.type;
-		this.boardNum = query.num;
-		this.title = this.boardType === 'notice' ? '공지사항' : '자유게시판';
-		this.loadView();
 	},
 	updated() {},
 	methods: {

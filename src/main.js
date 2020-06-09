@@ -3,6 +3,7 @@ import Vue from 'vue';
 import dotenv from 'dotenv';
 import axios from 'axios';
 import globalFunctions from '@/utils/globalFunction';
+import VueDaumPostcode from 'vue-daum-postcode';
 import vuetify from './plugins/vuetify';
 import App from './App.vue';
 import router from './router';
@@ -18,6 +19,7 @@ Vue.config.productionTip = false;
 
 // 전역으로 사용될 공통 함수
 Vue.use(globalFunctions);
+Vue.use(VueDaumPostcode);
 
 new Vue({
 	router,

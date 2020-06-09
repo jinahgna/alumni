@@ -2,7 +2,9 @@
 	<v-container class="board-list" v-if="isLogin">
 		<h2>관리자 (사용자 리스트)</h2>
 		<v-simple-table>
-			<caption>사용자 리스트</caption>
+			<caption>
+				사용자 리스트
+			</caption>
 			<colgroup>
 				<col />
 				<col />
@@ -45,15 +47,7 @@
 					<td class="text-center">{{ list.curr_corp }}</td>-->
 					<td class="text-center">
 						<span v-if="list.user_status === 1">{{ list.user_status }}</span>
-						<v-btn
-							depressed
-							small
-							color="#6fd400"
-							dark
-							class="mr-1"
-							v-if="list.user_status === 0"
-							@click="updatePermission(list.idx)"
-						>회원가입 승인</v-btn>
+						<v-btn depressed small color="#6fd400" dark class="mr-1" v-if="list.user_status === 0" @click="updatePermission(list.idx)">회원가입 승인</v-btn>
 					</td>
 				</tr>
 			</tbody>
@@ -87,7 +81,7 @@ export default {
 	name: 'adminUserList',
 	data() {
 		return {
-			isLogin: this.$store.state.common.isLogin,
+			isLogin: JSON.parse(sessionStorage.getItem('isLogin')),
 			// totalNum: 0,
 			// boardNum: 0,
 			// pagingListNum: 0,
@@ -105,11 +99,13 @@ export default {
 	mounted() {
 		// const query = qs.parse(window.location.search, { ignoreQueryPrefix: true });
 		// this.boardNum = query.num;
-		if (this.isLogin === false) {
+		if (this.isLogin === null) {
 			alert('로그인 후 이용해주세요.');
 			this.$router.push({ path: '/' });
+		} else {
+			this.$store.commit(commonMutationType.SET_IS_LOGIN, true);
+			this.loadView();
 		}
-		this.loadView();
 	},
 	updated() {},
 	methods: {

@@ -3,7 +3,9 @@
 		<h2>{{ title }}</h2>
 		<v-simple-table>
 			<template v-slot:default>
-				<caption>게시판 글 등록하기</caption>
+				<caption>
+					게시판 글 등록하기
+				</caption>
 				<colgroup>
 					<col style="width:10%;" />
 					<col style="width:25%;" />
@@ -23,15 +25,7 @@
 						<th class="va-top">content</th>
 						<td colspan="5" class="pl-4 pt-4 pb-4 pr-0">
 							<div>
-								<textarea
-									name
-									id
-									cols="30"
-									rows="10"
-									class="input-write"
-									placeholder="글을 입력해주세요"
-									v-model="boardContent"
-								></textarea>
+								<textarea name id cols="30" rows="10" class="input-write" placeholder="글을 입력해주세요" v-model="boardContent"></textarea>
 							</div>
 						</td>
 					</tr>
@@ -56,8 +50,8 @@ export default {
 	name: 'BoardWrite',
 	data() {
 		return {
-			isLogin: this.$store.state.common.isLogin,
-			authorId: this.$store.state.common.login.idx,
+			isLogin: JSON.parse(sessionStorage.getItem('isLogin')),
+			authorId: '',
 			title: '',
 			buttonText: '',
 			boardTitle: '',
@@ -70,24 +64,26 @@ export default {
 		...mapGetters(['boardViewData']),
 	},
 	mounted() {
-		if (this.isLogin === false) {
+		if (this.isLogin === null) {
 			alert('로그인 후 이용해주세요.');
 			this.$router.push({ path: '/' });
-		}
-		const query = qs.parse(window.location.search, { ignoreQueryPrefix: true });
-		this.boardType = query.type;
-		this.boardId = query.board_id;
-		this.title = this.boardType === 'notice' ? '공지사항' : '자유게시판';
-		this.buttonText = this.boardId !== undefined ? '수정하기' : '글쓰기';
-		if (this.boardId !== undefined) {
-			this.loadView();
-			console.log('this.boardViewData', this.boardViewData);
-			this.boardTitle = this.boardViewData.title;
-			this.boardContent = this.boardViewData.content;
-			this.boardType = this.boardViewData.board_type;
-			this.isNotice = this.boardViewData.is_notice;
-			this.isClosed = this.boardViewData.is_closed;
-			this.authorId = this.boardViewData.author_id;
+		} else {
+			this.authorId = JSON.parse(sessionStorage.getItem('loginInfo')).idx;
+			this.$store.commit(commonMutationType.SET_IS_LOGIN, true);
+			const query = qs.parse(window.location.search, { ignoreQueryPrefix: true });
+			this.boardType = query.type;
+			this.boardId = query.board_id;
+			this.title = this.boardType === 'notice' ? '공지사항' : '자유게시판';
+			this.buttonText = this.boardId !== undefined ? '수정하기' : '글쓰기';
+			if (this.boardId !== undefined) {
+				this.boardTitle = this.boardViewData.title;
+				this.boardContent = this.boardViewData.content;
+				this.boardType = this.boardViewData.board_type;
+				this.isNotice = this.boardViewData.is_notice;
+				this.isClosed = this.boardViewData.is_closed;
+				this.authorId = this.boardViewData.author_id;
+				this.loadView();
+			}
 		}
 	},
 	methods: {

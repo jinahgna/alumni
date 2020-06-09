@@ -2,15 +2,7 @@
 	<div class="wrap-login-info">
 		<div class="before-login" v-if="!isLogin">
 			<v-text-field label="ID" hide-details="auto" color="#6fd400" clearable v-model="userId"></v-text-field>
-			<v-text-field
-				label="PASSWORD"
-				type="password"
-				hide-details="auto"
-				autocomplete="new-password"
-				color="#6fd400"
-				clearable
-				v-model="userPassword"
-			></v-text-field>
+			<v-text-field label="PASSWORD" type="password" hide-details="auto" autocomplete="new-password" color="#6fd400" clearable v-model="userPassword"></v-text-field>
 			<div class="wrap-btn">
 				<v-btn x-large color="#6fd400" dark @click="login">login</v-btn>
 			</div>
@@ -26,7 +18,7 @@
 			<div class="wrap-btn">
 				<v-btn x-large color="#6fd400" dark @click="infoModify">내정보 수정</v-btn>
 				<v-btn x-large color="#19a518" dark class="mt-5" @click="logout">로그아웃</v-btn>
-				<v-btn x-large color="#9e9e9e" dark class="mt-5" @click="deleteUser">탈퇴하기</v-btn>
+				<v-btn x-large color="#9e9e9e" dark class="mt-10" @click="deleteUser">탈퇴하기</v-btn>
 			</div>
 		</div>
 	</div>
@@ -43,8 +35,8 @@ export default {
 	components: {},
 	data() {
 		return {
-			isLogin: this.$store.state.common.isLogin,
-			loginInfo: this.$store.state.common.login,
+			isLogin: JSON.parse(sessionStorage.getItem('isLogin')),
+			loginInfo: JSON.parse(sessionStorage.getItem('loginInfo')),
 			userId: '',
 			userPassword: '',
 		};
@@ -61,8 +53,8 @@ export default {
 		loadView() {
 			if (this.isLogin === true) {
 				this.userId = this.loginInfo.user_id;
+				this.$store.commit(commonMutationType.SET_IS_LOGIN, true);
 			}
-			console.log('this.isLogin', this.isLogin);
 		},
 		async login() {
 			const payload = {
@@ -72,13 +64,14 @@ export default {
 			await this.$store.dispatch(commonActionType.ACTION_LOGIN, payload);
 			this.loginInfo = this.$store.state.common.login;
 			this.isLogin = this.$store.state.common.isLogin;
-
 			if (this.isLogin === true) {
 				alert('로그인이 완료 되었습니다. ');
+				sessionStorage.setItem('loginInfo', JSON.stringify(this.loginInfo));
+				sessionStorage.setItem('isLogin', true);
+				this.loadView();
 			} else {
 				alert('로그인 정보를 다시 확인해주세요. ');
 			}
-			this.loadView();
 		},
 		infoModify() {
 			this.$router.push(`/userInfoWrite?user_idx=${this.loginInfo.idx}`);
@@ -89,13 +82,15 @@ export default {
 			if (confirmDelete === true) {
 				await this.$store.dispatch(commonActionType.ACTION_USER_DELETE, payload);
 				alert('회원 탈퇴가 완료되었습니다.');
+				sessionStorage.removeItem('loginInfo');
+				sessionStorage.removeItem('isLogin');
+				this.$store.commit(commonMutationType.SET_IS_LOGIN, false);
+				this.$router.go(this.$router.currentRoute);
 			}
-			this.$store.commit(commonMutationType.SET_IS_LOGIN, false);
-			this.$router.go(this.$router.currentRoute);
 		},
 		logout() {
-			// sessionStorage.removeItem('');
-			// sessionStorage.removeItem('');
+			sessionStorage.removeItem('loginInfo');
+			sessionStorage.removeItem('isLogin');
 			this.$store.commit(commonMutationType.SET_IS_LOGIN, false);
 			this.$router.go(this.$router.currentRoute);
 		},
