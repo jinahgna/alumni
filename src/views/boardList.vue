@@ -1,5 +1,5 @@
 <template>
-	<v-container class="board-list" v-if="isLogin">
+	<v-container class="board-list">
 		<h2>{{ this.title }}</h2>
 		<v-simple-table>
 			<caption>게시판 리스트</caption>
@@ -77,13 +77,12 @@ import qs from 'qs';
 import { mapGetters } from 'vuex';
 import commonMutationType from '@/store/mutationsType';
 import commonActionType from '@/store/actionsType';
+import isLogin from '@/components/mixins/isLogin';
 
 export default {
 	name: 'boardList',
 	data() {
 		return {
-			isLogin: JSON.parse(sessionStorage.getItem('isLogin')),
-			authorId: '',
 			title: '',
 			boardType: '',
 			totalNum: 0,
@@ -97,22 +96,16 @@ export default {
 			nextFlag: false,
 		};
 	},
+	mixins: [isLogin],
 	computed: {
 		...mapGetters(['boardListData', 'noticeListData']),
 	},
 	mounted() {
-		if (this.isLogin === null) {
-			alert('로그인 후 이용해주세요.');
-			this.$router.push({ path: '/' });
-		} else {
-			this.authorId = JSON.parse(sessionStorage.getItem('loginInfo')).idx;
-			this.$store.commit(commonMutationType.SET_IS_LOGIN, true);
-			const query = qs.parse(window.location.search, { ignoreQueryPrefix: true });
-			this.boardType = query.type;
-			this.boardNum = query.num;
-			this.title = this.boardType === 'notice' ? '공지사항' : '자유게시판';
-			this.loadView();
-		}
+		const query = qs.parse(window.location.search, { ignoreQueryPrefix: true });
+		this.boardType = query.type;
+		this.boardNum = query.num;
+		this.title = this.boardType === 'notice' ? '공지사항' : '자유게시판';
+		this.loadView();
 	},
 	updated() {},
 	methods: {

@@ -2,7 +2,15 @@
 	<div class="wrap-login-info">
 		<div class="before-login" v-if="!isLogin">
 			<v-text-field label="ID" hide-details="auto" color="#6fd400" clearable v-model="userId"></v-text-field>
-			<v-text-field label="PASSWORD" type="password" hide-details="auto" autocomplete="new-password" color="#6fd400" clearable v-model="userPassword"></v-text-field>
+			<v-text-field
+				label="PASSWORD"
+				type="password"
+				hide-details="auto"
+				autocomplete="new-password"
+				color="#6fd400"
+				clearable
+				v-model="userPassword"
+			></v-text-field>
 			<div class="wrap-btn">
 				<v-btn x-large color="#6fd400" dark @click="login">login</v-btn>
 			</div>
@@ -40,9 +48,6 @@ export default {
 			userId: '',
 			userPassword: '',
 		};
-	},
-	computed: {
-		// ...mapGetters(['login']),
 	},
 	mounted() {
 		this.userId = '';

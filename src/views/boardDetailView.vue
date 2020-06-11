@@ -1,11 +1,9 @@
 <template>
-	<v-container v-if="isLogin">
+	<v-container>
 		<h2>{{ this.title }}</h2>
 		<v-simple-table>
 			<template v-slot:default>
-				<caption>
-					게시판 글 상세보기
-				</caption>
+				<caption>게시판 글 상세보기</caption>
 				<colgroup>
 					<col style="width:75px;" />
 					<col />
@@ -47,8 +45,22 @@
 							<div class="comment-write">
 								<textarea name id cols="5" rows="3" v-model="commentText"></textarea>
 								<div class="text-right">
-									<v-btn depressed small color="#a2a69e" dark @click="commentWrite(isCommentWrite)">{{ commentBtn }}</v-btn>
-									<v-btn depressed small color="#a2a69e" dark class="ml-1" v-if="isCommentWrite === false" @click="commentRefresh">수정 취소</v-btn>
+									<v-btn
+										depressed
+										small
+										color="#a2a69e"
+										dark
+										@click="commentWrite(isCommentWrite)"
+									>{{ commentBtn }}</v-btn>
+									<v-btn
+										depressed
+										small
+										color="#a2a69e"
+										dark
+										class="ml-1"
+										v-if="isCommentWrite === false"
+										@click="commentRefresh"
+									>수정 취소</v-btn>
 								</div>
 							</div>
 						</td>
@@ -70,13 +82,12 @@ import qs from 'qs';
 import { mapGetters } from 'vuex';
 import commonMutationType from '@/store/mutationsType';
 import commonActionType from '@/store/actionsType';
+import isLogin from '@/components/mixins/isLogin';
 
 export default {
 	name: 'BoardDetailView',
 	data() {
 		return {
-			isLogin: JSON.parse(sessionStorage.getItem('isLogin')),
-			authorId: '',
 			title: '',
 			boardId: '',
 			commentText: '',
@@ -86,22 +97,16 @@ export default {
 			commentId: Number,
 		};
 	},
+	mixins: [isLogin],
 	computed: {
 		...mapGetters(['boardViewData', 'boardCommentData']),
 	},
 	mounted() {
-		if (this.isLogin === null) {
-			alert('로그인 후 이용해주세요.');
-			this.$router.push({ path: '/' });
-		} else {
-			this.authorId = JSON.parse(sessionStorage.getItem('loginInfo')).idx;
-			this.$store.commit(commonMutationType.SET_IS_LOGIN, true);
-			const query = qs.parse(window.location.search, { ignoreQueryPrefix: true });
-			this.boardId = query.board_id;
-			this.boardType = query.type;
-			this.title = this.boardType === 'notice' ? '공지사항' : '자유게시판';
-			this.loadView();
-		}
+		const query = qs.parse(window.location.search, { ignoreQueryPrefix: true });
+		this.boardId = query.board_id;
+		this.boardType = query.type;
+		this.title = this.boardType === 'notice' ? '공지사항' : '자유게시판';
+		this.loadView();
 	},
 	methods: {
 		async loadView() {

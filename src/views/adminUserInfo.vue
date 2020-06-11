@@ -1,10 +1,8 @@
 <template>
-	<v-container class="board-list" v-if="isLogin">
+	<v-container class="board-list">
 		<h2>관리자 (사용자 리스트)</h2>
 		<v-simple-table>
-			<caption>
-				사용자 리스트
-			</caption>
+			<caption>사용자 리스트</caption>
 			<colgroup>
 				<col />
 				<col />
@@ -28,8 +26,6 @@
 					<th class="text-center">주소</th>
 					<th class="text-center">연락처</th>
 					<th class="text-center">이메일</th>
-					<!-- <th class="text-center">가입일</th>
-					<th class="text-center">현직장</th>-->
 					<th class="text-center">승인여부</th>
 				</tr>
 			</thead>
@@ -43,31 +39,21 @@
 					<td class="text-center">{{ list.user_address }}</td>
 					<td class="text-center">{{ list.user_phone }}</td>
 					<td class="text-center">{{ list.email }}</td>
-					<!-- <td class="text-center">{{ list.created }}</td>
-					<td class="text-center">{{ list.curr_corp }}</td>-->
 					<td class="text-center">
 						<span v-if="list.user_status === 1">{{ list.user_status }}</span>
-						<v-btn depressed small color="#6fd400" dark class="mr-1" v-if="list.user_status === 0" @click="updatePermission(list.idx)">회원가입 승인</v-btn>
+						<v-btn
+							depressed
+							small
+							color="#6fd400"
+							dark
+							class="mr-1"
+							v-if="list.user_status === 0"
+							@click="updatePermission(list.idx)"
+						>회원가입 승인</v-btn>
 					</td>
 				</tr>
 			</tbody>
 		</v-simple-table>
-		<!-- pagination -->
-		<!-- <div>
-			<div class="paging-area">
-				<a v-if="firstFlag === true" href="javascript:;" @click="goPaging('first')">&lt;&lt;</a>
-				<a v-if="prevFlag === true" href="javascript:;" @click="goPaging('prev')">&lt;</a>
-				<ul>
-					<li v-for="(v, i) in numberArr" v-bind:key="v" v-bind:item="v" v-bind:index="i" style="display:inline-block">
-						<a v-if="Number(boardNum) !== v - 1" href="javascript:;" @click="goPaging(v)">{{ v }}</a>
-						<span v-if="Number(boardNum) === v - 1">{{ v }}</span>
-					</li>
-				</ul>
-				<a v-if="nextFlag === true" href="javascript:;" @click="goPaging('next')">&gt;</a>
-				<a v-if="lastFlag === true" href="javascript:;" @click="goPaging('last')">&gt;&gt;</a>
-			</div>
-		</div>-->
-		<!-- // pagination -->
 	</v-container>
 </template>
 
@@ -76,46 +62,24 @@ import qs from 'qs';
 import { mapGetters } from 'vuex';
 import commonMutationType from '@/store/mutationsType';
 import commonActionType from '@/store/actionsType';
+import isLogin from '@/components/mixins/isLogin';
 
 export default {
 	name: 'adminUserList',
 	data() {
-		return {
-			isLogin: JSON.parse(sessionStorage.getItem('isLogin')),
-			// totalNum: 0,
-			// boardNum: 0,
-			// pagingListNum: 0,
-			// arrPagingNum: [],
-			// numberArr: [],
-			// firstFlag: false,
-			// lastFlag: false,
-			// prevFlag: false,
-			// nextFlag: false,
-		};
+		return {};
 	},
+	mixins: [isLogin],
 	computed: {
 		...mapGetters(['userList']),
 	},
 	mounted() {
-		// const query = qs.parse(window.location.search, { ignoreQueryPrefix: true });
-		// this.boardNum = query.num;
-		if (this.isLogin === null) {
-			alert('로그인 후 이용해주세요.');
-			this.$router.push({ path: '/' });
-		} else {
-			this.$store.commit(commonMutationType.SET_IS_LOGIN, true);
-			this.loadView();
-		}
+		this.loadView();
 	},
 	updated() {},
 	methods: {
 		// api 호출
 		async loadView() {
-			// const payload = `/adminUserInfo?num=${this.boardNum}`;
-			// await this.$store.dispatch(commonActionType.ACTION_USER_LIST, payload);
-			// this.totalNum = this.$store.state.common.userList.totNum;
-			// this.pagingListNum = Math.ceil(this.totalNum / 10);
-			// this.getTotalNum();
 			await this.$store.dispatch(commonActionType.ACTION_USER_LIST);
 		},
 		async updatePermission(idx) {
@@ -126,67 +90,6 @@ export default {
 			alert('사용자 승인이 완료 되었습니다. ');
 			this.loadView();
 		},
-		// pagination setting
-		// getTotalNum() {
-		// 	// 선택된 페이징의 번호가 5 이하일 경우
-		// 	if (this.boardNum <= 4) {
-		// 		if (this.pagingListNum > 4) {
-		// 			for (let i = 1; i <= 5; i += 1) {
-		// 				this.arrPagingNum.push(i);
-		// 			}
-		// 			this.lastFlag = true;
-		// 			this.nextFlag = true;
-		// 		} else {
-		// 			for (let i = 1; i <= this.pagingListNum; i += 1) {
-		// 				this.arrPagingNum.push(i);
-		// 			}
-		// 		}
-		// 		// 선택된 페이징의 번호가 5 이상일 경우
-		// 	} else if (this.boardNum > 4) {
-		// 		const startNum = this.boardNum - (this.boardNum % 5) + 1;
-		// 		const lastNum = startNum + 4;
-		// 		if (lastNum >= this.pagingListNum) {
-		// 			for (let i = startNum; i <= this.pagingListNum; i += 1) {
-		// 				this.arrPagingNum.push(i);
-		// 			}
-		// 			this.firstFlag = true;
-		// 			this.prevFlag = true;
-		// 		} else {
-		// 			for (let i = startNum; i <= lastNum; i += 1) {
-		// 				this.arrPagingNum.push(i);
-		// 			}
-		// 			this.firstFlag = true;
-		// 			this.prevFlag = true;
-		// 			this.lastFlag = true;
-		// 			this.nextFlag = true;
-		// 		}
-		// 	}
-		// 	this.numberArr = this.arrPagingNum;
-		// },
-		// pagination click event
-		// goPaging(v) {
-		// 	if (typeof v === 'number') {
-		// 		this.boardNum = v - 1;
-		// 	} else if (typeof v === 'string') {
-		// 		switch (v) {
-		// 			case 'last':
-		// 				this.boardNum = this.pagingListNum - 1;
-		// 				break;
-		// 			case 'first':
-		// 				this.boardNum = 0;
-		// 				break;
-		// 			case 'next':
-		// 				this.boardNum = this.arrPagingNum[this.arrPagingNum.length - 1];
-		// 				break;
-		// 			case 'prev':
-		// 				this.boardNum = this.arrPagingNum[0] - 2;
-		// 				break;
-		// 			default:
-		// 				break;
-		// 		}
-		// 	}
-		// 	this.$router.push(`/adminUserInfo?num=${this.boardNum}`);
-		// },
 	},
 };
 </script>
