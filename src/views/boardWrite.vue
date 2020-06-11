@@ -3,9 +3,7 @@
 		<h2>{{ title }}</h2>
 		<v-simple-table>
 			<template v-slot:default>
-				<caption>
-					게시판 글 등록하기
-				</caption>
+				<caption>게시판 글 등록하기</caption>
 				<colgroup>
 					<col style="width:10%;" />
 					<col style="width:25%;" />
@@ -25,7 +23,15 @@
 						<th class="va-top">content</th>
 						<td colspan="5" class="pl-4 pt-4 pb-4 pr-0">
 							<div>
-								<textarea name id cols="30" rows="10" class="input-write" placeholder="글을 입력해주세요" v-model="boardContent"></textarea>
+								<textarea
+									name
+									id
+									cols="30"
+									rows="10"
+									class="input-write"
+									placeholder="글을 입력해주세요"
+									v-model="boardContent"
+								></textarea>
 							</div>
 						</td>
 					</tr>
@@ -93,27 +99,27 @@ export default {
 			} else if (this.boardContent === '') {
 				alert('본문을 입력해주세요.');
 			}
-			const payloadAdd = {
-				title: this.boardTitle,
-				content: this.boardContent,
-				type: this.boardType,
-				is_notice: 0,
-				is_closed: '0',
-				author_id: this.authorId,
-			};
-			const payloadUpdate = {
-				title: this.boardTitle,
-				content: this.boardContent,
-				type: this.boardType,
-				is_notice: 0,
-				is_closed: '0',
-				board_id: this.boardId,
-			};
 			if (this.boardId === undefined) {
+				const payloadAdd = {
+					title: this.boardTitle,
+					content: this.boardContent,
+					type: this.boardType,
+					is_notice: 0,
+					is_closed: '0',
+					author_id: this.authorId,
+				};
 				await this.$store.dispatch(commonActionType.ACTION_BOARD_ADD, payloadAdd);
 				alert('게시물 등록이 완료되었습니다.');
 				this.$router.replace({ path: `/boardList?type=${this.boardType}&num=0` });
 			} else {
+				const payloadUpdate = {
+					title: this.boardTitle,
+					content: this.boardContent,
+					type: this.boardType,
+					is_notice: 0,
+					is_closed: '0',
+					board_id: this.boardId,
+				};
 				await this.$store.dispatch(commonActionType.ACTION_BOARD_UPDATE, payloadUpdate);
 				alert('게시물 수정이 완료되었습니다.');
 				this.$router.replace({ path: `/boardDetailView?type=${this.boardType}&board_id=${this.boardId}` });

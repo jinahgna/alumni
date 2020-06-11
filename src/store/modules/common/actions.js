@@ -1,6 +1,6 @@
 import commonActionType from '@/store/actionsType';
 import commonMutationType from '@/store/mutationsType';
-import apiModule from '@/api/module1';
+import apiModule from '@/api/alumniModule';
 
 const actions = {
 	/**
@@ -11,6 +11,7 @@ const actions = {
 	async [commonActionType.ACTION_BOARD_LIST]({
 		commit
 	}, payload) {
+		// 방법1
 		try {
 			await apiModule.getModule('/getBoardList', payload).then((result) => {
 				commit(commonMutationType.SET_BOARD_LIST, result.data.result);
@@ -18,6 +19,13 @@ const actions = {
 		} catch (e) {
 			console.log('게시판 조회 실패');
 		}
+		// 방법2
+		// try {
+		// 	const boardList = await apiModule.getModule('/getBoardList', payload);
+		// 	commit(commonMutationType.SET_BOARD_LIST, boardList.data.result);
+		// } catch (e) {
+		// 	console.log('게시판 조회 실패');
+		// }
 	},
 	/**
 	 * @description action 공지 리스트 조회

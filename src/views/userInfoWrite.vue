@@ -32,7 +32,7 @@
 			type="password"
 			v-if="!isLogin"
 			v-model="userPasswordConfirm"
-			:rules="[() => (userPassword !== '' && userPasswordConfirm !== '' && userPassword === userPasswordConfirm) || '비밀번호가 일치하지 않습니다.']"
+			:rules="[(v) => this.userPassword === this.userPasswordConfirm || '비밀번호가 일치하지 않습니다.']"
 		></v-text-field>
 		<v-text-field label="NAME" hide-details="auto" color="#6fd400" clearable v-model="userName"></v-text-field>
 		<p class="wrap-input-button">
@@ -53,7 +53,14 @@
 			type="number"
 			v-model="userPhone"
 		></v-text-field>
-		<v-text-field label="E-MAIL" hide-details="auto" color="#6fd400" clearable v-model="userEmail"></v-text-field>
+		<v-text-field
+			label="E-MAIL"
+			hide-details="auto"
+			color="#6fd400"
+			clearable
+			v-model="userEmail"
+			:rules="[(v) => mailCheck.test(v) || '이메일 형식을 맞춰주세요.']"
+		></v-text-field>
 		<v-radio-group v-model="userGender">
 			<v-radio label="FEMALE" value="F" color="#6fd400"></v-radio>
 			<v-radio label="MALE" value="M" color="#6fd400"></v-radio>
@@ -100,6 +107,7 @@ export default {
 			userCorp: '',
 			buttonText: '',
 			openPopup: false,
+			mailCheck: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
 		};
 	},
 	computed: {
@@ -202,6 +210,10 @@ export default {
 				alert('이메일을 입력해주세요.');
 				return false;
 			}
+			if (this.mailCheck.test(this.userEmail) === false) {
+				alert('이메일형식이 올바르지 않습니다.');
+				return false;
+			}
 			if (this.userGender === '') {
 				alert('성별을 입력해주세요.');
 				return false;
@@ -211,7 +223,6 @@ export default {
 				return false;
 			}
 			if (this.isLogin === true) {
-				console.log('회원정보수정');
 				await this.$store.dispatch(commonActionType.ACTION_USER_UPDATE, payloadUpdate);
 				alert('회원정보수정이 완료 되었습니다.');
 				this.loadView();

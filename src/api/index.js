@@ -1,4 +1,6 @@
-import module1 from './module1';
+import alumniModule from './alumniModule';
 
 // eslint-disable-next-line import/prefer-default-export
-export { module1 };
+export {
+    alumniModule
+};

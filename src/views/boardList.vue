@@ -2,9 +2,7 @@
 	<v-container class="board-list" v-if="isLogin">
 		<h2>{{ this.title }}</h2>
 		<v-simple-table>
-			<caption>
-				게시판 리스트
-			</caption>
+			<caption>게시판 리스트</caption>
 			<colgroup>
 				<col style="width:80px" />
 				<col />
@@ -21,7 +19,11 @@
 			</thead>
 			<tbody>
 				<template v-if="this.boardType === 'notice' && this.boardNum === '0'">
-					<tr v-for="(noticeList, index) in noticeListData" :key="index + '_' + index" class="notice-list">
+					<tr
+						v-for="(noticeList, index) in noticeListData"
+						:key="index + '_' + index"
+						class="notice-list"
+					>
 						<td class="text-center">{{ noticeList.rownum }}</td>
 						<td>
 							<a v-on:click="goDetailView(boardType, noticeList.idx)">{{ noticeList.title }}</a>
@@ -48,7 +50,13 @@
 				<a v-if="firstFlag === true" href="javascript:;" @click="goPaging('first')">&lt;&lt;</a>
 				<a v-if="prevFlag === true" href="javascript:;" @click="goPaging('prev')">&lt;</a>
 				<ul>
-					<li v-for="(v, i) in numberArr" v-bind:key="v" v-bind:item="v" v-bind:index="i" style="display:inline-block">
+					<li
+						v-for="(v, i) in numberArr"
+						v-bind:key="v"
+						v-bind:item="v"
+						v-bind:index="i"
+						style="display:inline-block"
+					>
 						<a v-if="Number(boardNum) !== v - 1" href="javascript:;" @click="goPaging(v)">{{ v }}</a>
 						<span v-if="Number(boardNum) === v - 1">{{ v }}</span>
 					</li>
