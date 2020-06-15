@@ -73,7 +73,7 @@ export default {
 		const query = qs.parse(window.location.search, { ignoreQueryPrefix: true });
 		this.boardType = query.type;
 		this.boardId = query.board_id;
-		this.title = this.boardType === 'notice' ? '공지사항' : '자유게시판';
+		this.title = this.boardType === 'notice' ? '공지사항' : '자유 게시판';
 		this.buttonText = this.boardId !== undefined ? '수정하기' : '글쓰기';
 		if (this.boardId !== undefined) {
 			this.boardTitle = this.boardViewData.title;
