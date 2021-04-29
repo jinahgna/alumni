@@ -140,7 +140,7 @@ export default {
 			this.userCorp = this.userDetail.curr_corp;
 		},
 		async actionIdCheck() {
-			console.log('test commit2');
+			console.log('test commit');
 			const idCheckData = {
 				user_id: this.userId,
 			};
